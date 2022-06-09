@@ -20,17 +20,23 @@ MueblesController.postMueble = async (req, res) => {
     let precio = req.body.precio;
     let idProveedor = req.body.idProveedor;
 
-    console.log("aaaa",idProveedor);
-    Mueble.create({
-        idProveedor: idProveedor,
-        nombre: nombre,
-        precio: precio
-    }).then(mueble => {
-        res.send(`${mueble.nombre}, you have been added succesfully`);
+    if(idProveedor === null || idProveedor == "" || idProveedor == undefined){
 
-    }).catch((error) => {
-        res.send(error);
-    });
+        res.send("No has introducido el id de Proveedor");
+
+    }else{
+        Mueble.create({
+            idProveedor: idProveedor,
+            nombre: nombre,
+            precio: precio
+        }).then(mueble => {
+            res.send(`${mueble.nombre}, you have been added succesfully`);
+    
+        }).catch((error) => {
+            res.send(error);
+        });
+    }
+    
 
 
 };
