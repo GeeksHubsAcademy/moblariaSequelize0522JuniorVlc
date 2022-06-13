@@ -33,5 +33,29 @@ ProveedoresController.postProveedor = async (req, res) => {
 
 };
 
+ProveedoresController.filtraProveedor = async (req, res) => {
+
+    let nombre = req.body.nombre;
+    let telefono = req.body.telefono;
+
+    Proveedore.findAll({
+        where : {
+            nombre: nombre,
+            telefono: telefono
+        },
+        order: [["id", "desc"]],
+        limit: 3
+    })
+    .then(proveedorEncontrado => {
+        
+        if(!proveedorEncontrado[0]?.dataValues.nombre){
+            res.send("No hemos encontrado a ningún proveedor");
+        }else {
+            res.send(proveedorEncontrado);
+        }
+    })
+};
+
+
 //Export
 module.exports = ProveedoresController;

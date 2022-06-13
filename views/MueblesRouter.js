@@ -9,6 +9,7 @@ const MueblesController = require('../controllers/MueblesController');
 //Endpoint-function links
 router.get('/', MueblesController.getMuebles);
 router.post('/addmueble', MueblesController.postMueble);
+router.get('/search/:model', MueblesController.searchMueble);
 
 
 //Export

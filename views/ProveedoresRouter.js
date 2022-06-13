@@ -8,6 +8,7 @@ const ProveedoresController = require('../controllers/ProveedoresController');
 
 //Endpoint-function links
 router.get('/', ProveedoresController.getProveedores);
+router.post('/', ProveedoresController.filtraProveedor);
 router.post('/addproveedor', ProveedoresController.postProveedor);
 
 

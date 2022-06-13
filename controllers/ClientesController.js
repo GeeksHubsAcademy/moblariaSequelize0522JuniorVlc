@@ -54,6 +54,7 @@ ClientesController.loginCliente = (req, res) => {
             if( bcrypt.compareSync(clave, usuarioEncontrado.password)){
                 //Ahora ya si hemos comprobado que el usuario existe (email es correcto) y el password SI corresponde a ese usuario
 
+                //generamos el token, pasándole como primer argumento el usuarioEncontrado, segundo argumento es la frase secreta.
                 let token = jwt.sign({ user: usuarioEncontrado }, authConfig.secret, {
                     expiresIn: authConfig.expires
                 });
