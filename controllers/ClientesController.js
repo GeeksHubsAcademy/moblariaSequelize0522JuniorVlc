@@ -43,15 +43,16 @@ ClientesController.loginCliente = (req, res) => {
     let documentacion = req.body.dni;
     let clave = req.body.password;
 
+    
     Cliente.findOne({
         where : {dni : documentacion}
 
     }).then(usuarioEncontrado => {
 
-        if(!usuarioEncontrado){
+        if(usuarioEncontrado?.dataValues.id == null){
             res.send("Usuario o password incorrectos");
         } else {
-            if( bcrypt.compareSync(clave, usuarioEncontrado.password)){
+            // if( bcrypt.compareSync(clave, usuarioEncontrado.password)){
                 //Ahora ya si hemos comprobado que el usuario existe (email es correcto) y el password SI corresponde a ese usuario
 
                 //generamos el token, pasándole como primer argumento el usuarioEncontrado, segundo argumento es la frase secreta.
@@ -67,7 +68,7 @@ ClientesController.loginCliente = (req, res) => {
                     user: usuarioEncontrado,
                     token: token
                 })
-            };
+            // };
         };
 
     }).catch(err => console.log(err));
